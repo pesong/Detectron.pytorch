@@ -9,7 +9,9 @@ data/*
 notebooks/*.pkl
 
 /Outputs
-
+Outputs/
+infer_outputs/
+.idea/
 # ------------------------------
 
 .vscode/*
