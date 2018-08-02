@@ -32,6 +32,8 @@ def convert_cityscapes(data_dir, out_dir):
         'train',
         'motorcycle',
         'bicycle',
+        'road',
+        'sky'
     ]
 
     for data_set, ann_dir in zip(sets, ann_dirs):
@@ -57,7 +59,7 @@ def convert_cityscapes(data_dir, out_dir):
                         ends_in % data_set.split('_')[0])] + 'leftImg8bit.png'
                     image['seg_file_name'] = filename[:-len(
                         ends_in % data_set.split('_')[0])] + \
-                        '%s_instanceIds.png' % data_set.split('_')[0]
+                        '%s_labelIds.png' % data_set.split('_')[0]
                     images.append(image)
 
                     fullname = os.path.join(root, image['seg_file_name'])
@@ -104,7 +106,7 @@ def convert_cityscapes(data_dir, out_dir):
         print("Num categories: %s" % len(categories))
         print("Num images: %s" % len(images))
         print("Num annotations: %s" % len(annotations))
-        with open(os.path.join(out_dir, json_name % data_set), 'wb') as outfile:
+        with open(os.path.join(out_dir, json_name % data_set), 'w') as outfile:
             outfile.write(json.dumps(ann_dict))
 
 

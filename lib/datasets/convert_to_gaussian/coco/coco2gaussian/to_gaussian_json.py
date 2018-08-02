@@ -21,10 +21,10 @@ class GaussianJson():
         self.coco_data_dir = coco_data_dir
 
 
-    def generate_gaussian_json(self):
+    def generate_gaussian_json(self, data_type):
         self.__get_basic_info__()
         self.__get_categories__()
-        self.__get_img_ann_()
+        self.__get_img_ann_(data_type)
 
         json_data = {
             "info": self.info,
@@ -32,11 +32,12 @@ class GaussianJson():
             "log_info": self.log_info,
             "categories": self.categories,
             "images": self.imgs,
-            # "annotations": self.anns_val
+            "annotations": self.anns
         }
 
-        with open(os.path.join(self.coco_data_dir, "Annotations" + "_" + ".json"), 'w') as jsonfile:
-            json.dump(json_data, jsonfile, sort_keys=True, indent=4)
+        with open(os.path.join(self.coco_data_dir, "Annotations_%s.json" % data_type), 'w') as jsonfile:
+            jsonfile.write(json.dumps(json_data, sort_keys=True))
+
 
 
 
@@ -87,12 +88,12 @@ class GaussianJson():
                 self.categories.append({"supercategory": super, "name": name, "id": id})
 
 
-    def __get_img_ann_(self):
+    def __get_img_ann_(self, data_type):
         coco_ann = GetAnn()
-        img_ids_val = coco_ann.get_gaussian_imgIds('val2017')
-        anns_list, img_list = coco_ann.get_img_ann_list(img_ids_val)
+        img_ids = coco_ann.get_gaussian_imgIds(data_type)
+        anns_list, img_list = coco_ann.get_img_ann_list(img_ids)
 
-        self.anns_val = coco_ann.mask2polys(anns_list)
+        self.anns = coco_ann.mask2polys(anns_list)
 
         # reset img id and note the mapping dict
         img_newid_map = {}
@@ -134,15 +135,11 @@ class GaussianJson():
 
 
 
-
-
-
-
 if __name__ == "__main__":
 
     coco_datapath = './'
     gs_json = GaussianJson(coco_datapath)
-    gs_json.generate_gaussian_json()
+    gs_json.generate_gaussian_json('train2017')
 
 
 

@@ -45,12 +45,13 @@ def instances2dict_with_polygons(imageFileList, verbose=False):
 
             if id2label[instanceObj.labelID].hasInstances:
                 mask = (imgNp == instanceId).astype(np.uint8)
-                contour, hier = cv2.findContours(
+                _, contour, hier, = cv2.findContours(
                     mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
                 polygons = [c.reshape(-1).tolist() for c in contour]
                 instanceObj_dict['contours'] = polygons
-                instances[id2label[instanceObj.labelID].name].append(
+
+            instances[id2label[instanceObj.labelID].name].append(
                     instanceObj_dict)
 
         imgKey = os.path.abspath(imageFileName)

@@ -2,6 +2,12 @@ data/*
 *.pyc
 *~
 
+# output json
+lib/datasets/convert_to_gaussian/coco/coco2gaussian/Annotations_train2017.json
+lib/datasets/convert_to_gaussian/coco/coco2gaussian/Annotations_val2017.json
+
+
+
 *.o
 *.so
 
