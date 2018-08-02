@@ -76,6 +76,11 @@ class GetAnn():
                 catIds = self.stuff_coco.getCatIds(catNms=[stuff])
                 img_ids.extend(self.stuff_coco.getImgIds(catIds=catIds))
 
+        # # mini version
+        # img_ids = img_ids[0:10]
+        # for img_id in img_ids:
+        #     print(img_id)
+
         return set(img_ids)
 
 

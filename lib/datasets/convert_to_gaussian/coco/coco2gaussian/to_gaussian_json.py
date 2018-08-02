@@ -40,9 +40,6 @@ class GaussianJson():
 
 
 
-
-
-
     def __get_basic_info__(self, ros_info=False):
         '''
         # get basic info such as description and vehicle/log info .etc
@@ -139,7 +136,7 @@ if __name__ == "__main__":
 
     coco_datapath = './'
     gs_json = GaussianJson(coco_datapath)
-    gs_json.generate_gaussian_json('train2017')
+    gs_json.generate_gaussian_json('val2017')
 
 
 

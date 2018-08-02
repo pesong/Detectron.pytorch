@@ -36,8 +36,8 @@ def instances2dict_with_polygons(imageFileList, verbose=False):
 
         # Loop through all instance ids in instance image
         for instanceId in np.unique(imgNp):
-            if instanceId < 1000:
-                continue
+            # if instanceId < 1000:
+            #     continue
 
 
             instanceObj = Instance(imgNp, instanceId)

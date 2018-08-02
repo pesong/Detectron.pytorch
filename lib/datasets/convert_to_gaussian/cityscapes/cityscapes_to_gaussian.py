@@ -29,10 +29,18 @@ def convert_cityscapes(data_dir, out_dir):
         'car',
         'truck',
         'bus',
-        'train',
         'motorcycle',
         'bicycle',
         'road',
+        'sidewalk',
+        'building',
+        'wall',
+        'fence',
+        'pole',
+        'traffic sign',
+        'traffic light',
+        'vegetation',
+        'terrain',
         'sky'
     ]
 
@@ -112,5 +120,5 @@ def convert_cityscapes(data_dir, out_dir):
 
 if __name__ == '__main__':
     data_dir = '/media/pesong/e/dl_gaussian/data/cityscapes'
-    out_dir = '/media/pesong/e/dl_gaussian/data/cityscapes/gaussian'
+    out_dir = './'
     convert_cityscapes(data_dir, out_dir)
