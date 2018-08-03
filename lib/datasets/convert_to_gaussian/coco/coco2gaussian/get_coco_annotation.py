@@ -13,7 +13,7 @@ import pylab
 
 class GetAnn():
     '''
-    get map of coco imgid and annotation which fit our gaussian dataset
+    get map of coco imgids and annotations which fit our gaussian dataset
     '''
 
     def __init__(self):
@@ -85,20 +85,23 @@ class GetAnn():
 
 
 
-    def get_img_ann_list(self, img_ids):
+    def get_img_ann_list(self, img_ids, gs_category_dict=False):
         '''
         get imgs list and annotations from coco label json
         :param img_ids:
         :return: filtered imgs and annotations
         '''
 
-        # get gaussian category map {cat_name:id}
-        gs_cat_map = {}
-        f = open(r'categories.yml', 'r')
-        catseqs = yaml.load(f)
-        for super, seqs in catseqs.items():
-            for cat_name, id in seqs.items():
-                gs_cat_map[cat_name] = id
+        if gs_category_dict:
+            gs_cat_map = gs_category_dict
+        else:
+            # get gaussian category map {cat_name:id}
+            gs_cat_map = {}
+            f = open(r'categories.yml', 'r')
+            catseqs = yaml.load(f)
+            for super, seqs in catseqs.items():
+                for cat_name, id in seqs.items():
+                    gs_cat_map[cat_name] = id
 
         anns_list = []
         img_list = []
@@ -211,12 +214,6 @@ if __name__ == "__main__":
 #  stone straw structural-other table tent textile-other towel tree vegetable wall-brick
 #  wall-concrete wall-other wall-panel wall-stone wall-tile wall-wood water-other
 #  waterdrops window-blind window-other wood other
-
-# person bicycle car motorcycle bus truck traffic light chair
-
-# table, road, pavement, bush/grass/tree (vegetation)  carpet/rug(地毯), fence, pavement
-#
-# 大类：sky/sky  wall/wall
 
 
 
