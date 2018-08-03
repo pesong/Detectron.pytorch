@@ -25,7 +25,7 @@ python tools/test_net.py --dataset coco2017 \
 
 python tools/infer_simple.py --dataset coco \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug03-16-14-51_pesong_step/ckpt/model_step159.pth \
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Jul26-11-47-28_pesong_step/ckpt/model_step157.pth \
 --image_dir demo/sample_images \
 --output_dir infer_outputs
 
