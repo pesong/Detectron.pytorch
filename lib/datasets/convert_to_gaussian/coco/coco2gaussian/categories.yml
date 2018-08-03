@@ -46,4 +46,4 @@ construction:
   wall: 72
 
 others:
-  others: 0
+  __background__: 0

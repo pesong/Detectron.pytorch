@@ -33,6 +33,9 @@ class GSJsonFromCityscapes():
             "annotations": self.annotations
         }
 
+        with open(os.path.join(self.out_dir, "instances_%s2017.json" % data_type), 'w') as jsonfile:
+            jsonfile.write(json.dumps(json_data, sort_keys=True))
+
     def __get_basic_info__(self, ros_info=False):
         """
         # get basic info such as description and vehicle/log infos .etc
@@ -87,7 +90,7 @@ class GSJsonFromCityscapes():
 
         sets = ['gtFine_val']
         ann_dirs = ['gtFine_trainvaltest/gtFine/%s' % data_type]           # data_type: val/train/test
-        json_name = 'instancesonly_filtered_%s.json'
+        json_name = ''
         ends_in = '%s_polygons.json'
 
         category_list = [
@@ -186,15 +189,13 @@ class GSJsonFromCityscapes():
 
                                 self.annotations.append(ann)
 
-            with open(os.path.join(self.out_dir, json_name % data_set), 'w') as outfile:
-                outfile.write(json.dumps(ann_dict))
 
 if __name__ == '__main__':
-    data_dir = '/media/pesong/e/dl_gaussian/data/cityscapes'
-    out_dir = './'
+    data_dir = '/media/pesong/e/dl_gaussian/data/cityscapes/cityscapes_ori'
+    out_dir = '/media/pesong/e/dl_gaussian/data/cityscapes/4detectron/annotations'
 
     # init
     gs_json_from_city = GSJsonFromCityscapes(data_dir, out_dir)
 
     # generate val json
-    gs_json_from_city.generate_gaussian_json('val')
+    gs_json_from_city.generate_gaussian_json('train')
