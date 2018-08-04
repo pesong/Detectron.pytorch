@@ -11,27 +11,35 @@ python tools/train_net_step.py --dataset cityscapes  \
 
 
 
-# finetune
+# finetune    use detectron
 
 python tools/train_net_step.py --dataset cityscapes  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 4 \
 --load_detectron data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x.pkl
 
+# finetune    use caffe checkpoint
+
+python tools/train_net_step.py --dataset cityscapes  \
+--cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
+--use_tfboard --bs 1 --nw 4 \
+--load_ckpt data/pretrained_model/resnet101_caffe.pth
+
+
 
 
 # inference
 
-python tools/test_net.py --dataset coco2017 \
+python tools/test_net.py --dataset cityscapes \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Jul26-11-47-28_pesong_step/ckpt/model_step157.pth
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-16-51-25_pesong_step/ckpt/model_step180.pth
 
 
 # visualize
 
-python tools/infer_simple.py --dataset coco \
+python tools/infer_simple.py --dataset cityscapes \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug03-16-14-51_pesong_step/ckpt/model_step159.pth \
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-16-51-25_pesong_step/ckpt/model_step180.pth \
 --image_dir demo/sample_images \
 --output_dir infer_outputs
 

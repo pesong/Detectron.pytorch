@@ -90,6 +90,9 @@ if __name__ == '__main__':
     if args.dataset == "coco2017":
         cfg.TEST.DATASETS = ('coco_2017_val',)
         cfg.MODEL.NUM_CLASSES = 81
+    elif args.dataset == "cityscapes":
+        cfg.TEST.DATASETS = ('cityscapes_val',)
+        cfg.MODEL.NUM_CLASSES = 9
     elif args.dataset == "keypoints_coco2017":
         cfg.TEST.DATASETS = ('keypoints_coco_2017_val',)
         cfg.MODEL.NUM_CLASSES = 2

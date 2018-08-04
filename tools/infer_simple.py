@@ -95,6 +95,9 @@ def main():
     if args.dataset.startswith("coco"):
         dataset = datasets.get_coco_dataset()
         cfg.MODEL.NUM_CLASSES = len(dataset.classes)
+    elif args.dataset.startswith("cityscapes"):
+        dataset = datasets.get_coco_dataset()
+        cfg.MODEL.NUM_CLASSES = len(dataset.classes)
     elif args.dataset.startswith("keypoints_coco"):
         dataset = datasets.get_coco_dataset()
         cfg.MODEL.NUM_CLASSES = 2

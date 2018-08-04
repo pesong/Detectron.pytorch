@@ -22,6 +22,8 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import yaml
+
 from utils.collections import AttrDict
 
 
@@ -44,42 +46,57 @@ def get_coco_dataset():
     #     'scissors', 'teddy bear', 'hair drier', 'toothbrush'
     # ]
 
-    classes = [
-        '__background__',
-        'building',
-        'wall',
-        'chair',
-        'slops',
-        'table',
-        'garbage'
-        'pack',
-        'potted plant',
-        'carpet',
-        'ladder',
-        'face',
-        'pole',
-        'traffic sign',
-        'billboard',
-        'traffic light',
-        'dustbin',
-        'fence',
-        'traffic_cone',
-        'road_pile',
-        'truck',
-        'bus',
-        'motorcycle',
-        'robot',
-        'rider',
-        'bicycle',
-        'person',
-        'car',
-        'sky',
-        'vegetation',
-        'pavement',
-        'lane markings',
-        'sidewalk',
-        'road'
-    ]
+    gaussian_category_yml_path = 'lib/datasets/convert_to_gaussian/gaussian_categories_test.yml'
+
+    classes = []
+    f = open(gaussian_category_yml_path, 'r')
+    catseqs = yaml.load(f)
+    for super, seqs in catseqs.items():
+        for name, id in seqs.items():
+            classes.append(name)
+
+    classes.insert(0, '__background__')
+
+    # classes = [
+    #     '__background__',
+    #     'building',
+    #     'wall',
+    #     'chair',
+    #     'slops',
+    #     'table',
+    #     'garbage'
+    #     'pack',
+    #     'potted plant',
+    #     'carpet',
+    #     'ladder',
+    #     'face',
+    #     'pole',
+    #     'traffic sign',
+    #     'billboard',
+    #     'traffic light',
+    #     'dustbin',
+    #     'fence',
+    #     'traffic_cone',
+    #     'road_pile',
+    #     'truck',
+    #     'bus',
+    #     'motorcycle',
+    #     'robot',
+    #     'rider',
+    #     'bicycle',
+    #     'person',
+    #     'car',
+    #     'sky',
+    #     'vegetation',
+    #     'pavement',
+    #     'lane markings',
+    #     'sidewalk',
+    #     'road'
+    # ]
 
     ds.classes = {i: name for i, name in enumerate(classes)}
     return ds
+
+
+if __name__ == '__main__':
+    get_coco_dataset()

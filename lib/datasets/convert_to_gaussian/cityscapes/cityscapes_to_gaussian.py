@@ -74,7 +74,7 @@ class GSJsonFromCityscapes():
 
         self.categories = []
         self.category_dict = {}
-        f = open(r'../gaussian_categories.yml', 'r')
+        f = open(r'../gaussian_categories_test.yml', 'r')
         catseqs = yaml.load(f)
         for super, seqs in catseqs.items():
             for name, id in seqs.items():
@@ -102,16 +102,16 @@ class GSJsonFromCityscapes():
             'motorcycle',
             'bicycle',
             'road',
-            'sidewalk',
-            'building',
-            'wall',
-            'fence',
-            'pole',
-            'traffic sign',
-            'traffic light',
-            'vegetation',
-            'terrain',
-            'sky'
+            # 'sidewalk',
+            # 'building',
+            # 'wall',
+            # 'fence',
+            # 'pole',
+            # 'traffic sign',
+            # 'traffic light',
+            # 'vegetation',
+            # 'terrain',
+            # 'sky'
         ]
 
         for data_set, ann_dir in zip(sets, ann_dirs):
@@ -199,3 +199,6 @@ if __name__ == '__main__':
 
     # generate val json
     gs_json_from_city.generate_gaussian_json('val')
+
+    # generate train json
+    gs_json_from_city.generate_gaussian_json('train')
