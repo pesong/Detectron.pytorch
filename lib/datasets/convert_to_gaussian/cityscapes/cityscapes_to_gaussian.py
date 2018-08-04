@@ -198,4 +198,4 @@ if __name__ == '__main__':
     gs_json_from_city = GSJsonFromCityscapes(data_dir, out_dir)
 
     # generate val json
-    gs_json_from_city.generate_gaussian_json('train')
+    gs_json_from_city.generate_gaussian_json('val')

@@ -97,7 +97,7 @@ class GetAnn():
         else:
             # get gaussian category map {cat_name:id}
             gs_cat_map = {}
-            f = open(r'categories.yml', 'r')
+            f = open('../../gaussian_categories.yml', 'r')
             catseqs = yaml.load(f)
             for super, seqs in catseqs.items():
                 for cat_name, id in seqs.items():
