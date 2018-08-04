@@ -5,7 +5,7 @@ python tools/train_net_step.py --dataset cityscapes  \
 
 
 # train    faster_rcnn_R-50-FPN.yaml
-python tools/train_net_step.py --dataset coco2017  \
+python tools/train_net_step.py --dataset cityscapes  \
 --cfg configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml \
 --use_tfboard --bs 1 --nw 4
 
@@ -13,7 +13,7 @@ python tools/train_net_step.py --dataset coco2017  \
 
 # finetune
 
-python tools/train_net_step.py --dataset coco2017  \
+python tools/train_net_step.py --dataset cityscapes  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 4 \
 --load_detectron data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x.pkl

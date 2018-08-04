@@ -239,8 +239,11 @@ def _expand_bbox_targets(bbox_target_data):
     bbox_targets = blob_utils.zeros((clss.size, 4 * num_bbox_reg_classes))
     bbox_inside_weights = blob_utils.zeros(bbox_targets.shape)
     inds = np.where(clss > 0)[0]
+    # print("DEBUG: inds value is {}".format(inds))
+    # print("DEBUG: NUM_CLASSES value is {}".format(cfg.MODEL.NUM_CLASSES))
     for ind in inds:
         cls = int(clss[ind])
+        # print("cls: {}".format(cls))
         start = 4 * cls
         end = start + 4
         bbox_targets[ind, start:end] = bbox_target_data[ind, 1:]

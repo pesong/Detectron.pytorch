@@ -117,7 +117,6 @@ DATASETS = {
         ANN_FN:
             _DATA_DIR + '/coco/annotations/instances_train2017.json',
     },
-
     'cityscapes_val': {
         IM_DIR:
             _DATA_DIR + '/coco/images/val2017',
