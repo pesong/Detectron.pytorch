@@ -39,7 +39,7 @@ python tools/test_net.py --dataset cityscapes \
 
 python tools/infer_simple.py --dataset cityscapes \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-16-51-25_pesong_step/ckpt/model_step180.pth \
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-20-08-55_pesong_step/ckpt/model_step139999.pth \
 --image_dir demo/sample_images \
 --output_dir infer_outputs
 
