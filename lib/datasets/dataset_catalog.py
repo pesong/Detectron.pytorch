@@ -113,15 +113,27 @@ DATASETS = {
     },
     'cityscapes_train': {
         IM_DIR:
-            _DATA_DIR + '/coco/images/train2017',
+            _DATA_DIR + '/cs/images/train2017',
         ANN_FN:
-            _DATA_DIR + '/coco/annotations/instances_train2017.json',
+            _DATA_DIR + '/cs/annotations/instances_train2017.json',
     },
     'cityscapes_val': {
         IM_DIR:
-            _DATA_DIR + '/coco/images/val2017',
+            _DATA_DIR + '/cs/images/val2017',
         ANN_FN:
-            _DATA_DIR + '/coco/annotations/instances_val2017.json',
+            _DATA_DIR + '/cs/annotations/instances_val2017.json',
+    },
+    'gaussian_train': {
+        IM_DIR:
+            _DATA_DIR + '/gs/images/train2017',
+        ANN_FN:
+            _DATA_DIR + '/gs/annotations/instances_train2017.json',
+    },
+    'gaussian_val': {
+        IM_DIR:
+            _DATA_DIR + '/gs/images/val2017',
+        ANN_FN:
+            _DATA_DIR + '/gs/annotations/instances_val2017.json',
     },
     'coco_2017_test': {  # 2017 test uses 2015 test images
         IM_DIR:

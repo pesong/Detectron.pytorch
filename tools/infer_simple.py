@@ -93,13 +93,16 @@ def main():
     assert bool(args.image_dir) ^ bool(args.images)
 
     if args.dataset.startswith("coco"):
-        dataset = datasets.get_coco_dataset()
+        dataset = datasets.get_dataset()
         cfg.MODEL.NUM_CLASSES = len(dataset.classes)
     elif args.dataset.startswith("cityscapes"):
-        dataset = datasets.get_coco_dataset()
+        dataset = datasets.get_dataset()
+        cfg.MODEL.NUM_CLASSES = len(dataset.classes)
+    elif args.dataset.startswith("gaussian"):
+        dataset = datasets.get_dataset()
         cfg.MODEL.NUM_CLASSES = len(dataset.classes)
     elif args.dataset.startswith("keypoints_coco"):
-        dataset = datasets.get_coco_dataset()
+        dataset = datasets.get_dataset()
         cfg.MODEL.NUM_CLASSES = 2
     else:
         raise ValueError('Unexpected dataset name: {}'.format(args.dataset))

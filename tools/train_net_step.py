@@ -156,6 +156,9 @@ def main():
     elif args.dataset == "cityscapes":
         cfg.TRAIN.DATASETS = ('cityscapes_train',)
         cfg.MODEL.NUM_CLASSES = 9
+    elif args.dataset == "gaussian":
+        cfg.TRAIN.DATASETS = ('gaussian_train',)
+        cfg.MODEL.NUM_CLASSES = 9
     elif args.dataset == "keypoints_coco2017":
         cfg.TRAIN.DATASETS = ('keypoints_coco_2017_train',)
         cfg.MODEL.NUM_CLASSES = 2

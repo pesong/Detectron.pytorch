@@ -14,7 +14,7 @@ import os
 import sys
 import numpy as np
 
-import datasets.cityscapes.coco_to_cityscapes_id as cs
+import lib.datasets.cityscapes.coco_to_cityscapes_id as cs
 
 NUM_CS_CLS = 9
 NUM_COCO_CLS = 81
@@ -92,9 +92,9 @@ def remove_momentum(model_dict):
 
 
 def load_and_convert_coco_model(args):
-    with open(args.coco_model_file_name, 'r') as f:
-        model_dict = pickle.load(f)
-    remove_momentum(model_dict)
+    with open(args.coco_model_file_name, 'rb') as f:
+        model_dict = pickle.load(f, encoding='iso-8859-1')
+    # remove_momentum(model_dict)
     convert_coco_blobs_to_cityscape_blobs(model_dict)
     return model_dict
 
@@ -106,7 +106,7 @@ if __name__ == '__main__':
         'Weights file does not exist'
     weights = load_and_convert_coco_model(args)
 
-    with open(args.out_file_name, 'w') as f:
+    with open(args.out_file_name, 'wb') as f:
         pickle.dump(weights, f, protocol=pickle.HIGHEST_PROTOCOL)
     print('Wrote blobs to {}:'.format(args.out_file_name))
     print(sorted(weights['blobs'].keys()))

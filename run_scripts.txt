@@ -1,11 +1,11 @@
 # train
-python tools/train_net_step.py --dataset cityscapes  \
+python tools/train_net_step.py --dataset gaussian  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 4
 
 
 # train    faster_rcnn_R-50-FPN.yaml
-python tools/train_net_step.py --dataset cityscapes  \
+python tools/train_net_step.py --dataset gaussian  \
 --cfg configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml \
 --use_tfboard --bs 1 --nw 4
 
@@ -13,14 +13,15 @@ python tools/train_net_step.py --dataset cityscapes  \
 
 # finetune    use detectron
 
-python tools/train_net_step.py --dataset cityscapes  \
+python tools/train_net_step.py --dataset gaussian  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 4 \
---load_detectron data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x.pkl
+--load_detectron data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x_CS.pkl
+
 
 # finetune    use caffe checkpoint
 
-python tools/train_net_step.py --dataset cityscapes  \
+python tools/train_net_step.py --dataset gaussian  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 4 \
 --load_ckpt data/pretrained_model/resnet101_caffe.pth
@@ -30,16 +31,25 @@ python tools/train_net_step.py --dataset cityscapes  \
 
 # inference
 
-python tools/test_net.py --dataset cityscapes \
+python tools/test_net.py --dataset gaussian \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-16-51-25_pesong_step/ckpt/model_step180.pth
 
 
 # visualize
 
-python tools/infer_simple.py --dataset cityscapes \
+python tools/infer_simple.py --dataset gaussian \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-20-08-55_pesong_step/ckpt/model_step139999.pth \
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug10-16-52-03_pesong_step/ckpt/model_step236.pth \
 --image_dir demo/sample_images \
 --output_dir infer_outputs
+
+
+
+# convert original coco model to our own model
+
+python lib/datasets/cityscapes/tools/convert_coco_model_to_cityscapes.py \
+--coco_model  data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x.pkl \
+--output data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x_CS.pkl
+
 
