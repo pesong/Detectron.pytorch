@@ -25,27 +25,46 @@ from __future__ import unicode_literals
 import yaml
 
 from utils.collections import AttrDict
+from datasets.dataset_catalog import ANN_FN
+from datasets.dataset_catalog import DATASETS
+import json
 
 
-def get_dataset():
+
+def get_dataset(dataset):
     """A dummy COCO dataset that includes only the 'classes' field."""
     ds = AttrDict()
+    classes = []
 
-    classes = [
-        '__background__',
-        'road',
-        'person',
-        'rider',
-        'car',
-        'truck',
-        'bus',
-        'motorcycle',
-        'bicycle'
-    ]
 
+    ann_json_path = DATASETS[dataset][ANN_FN]
+
+    with open(ann_json_path) as f:
+        line = f.readline()
+        d = json.loads(line)
+        categories = d['categories']
+
+    for cat in categories:
+        classes.append(cat['name'])
+
+    classes.insert(0, '__background__')
+
+    # classes = [
+    #     '__background__',
+    #     'road',
+    #     'car',
+    #     'truck',
+    #     'bus',
+    #     'bicycle',
+    #     'motorcycle',
+    #     'rider',
+    #     'person'
+    # ]
+
+    print(classes)
     ds.classes = {i: name for i, name in enumerate(classes)}
     return ds
 
 
 if __name__ == '__main__':
-    get_dataset()
+    get_dataset('cityscapes_val')

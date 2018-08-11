@@ -13,9 +13,9 @@ python tools/train_net_step.py --dataset gaussian  \
 
 # finetune    use detectron
 
-python tools/train_net_step.py --dataset gaussian  \
+python tools/train_net_step.py --dataset coco2017  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---use_tfboard --bs 1 --nw 4 \
+--use_tfboard --bs 1 --nw 2 \
 --load_detectron data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x_CS.pkl
 
 
@@ -38,9 +38,9 @@ python tools/test_net.py --dataset gaussian \
 
 # visualize
 
-python tools/infer_simple.py --dataset gaussian \
+python tools/infer_simple.py --dataset coco \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug10-16-52-03_pesong_step/ckpt/model_step236.pth \
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug11-16-43-23_pesong_step/ckpt/model_step274.pth \
 --image_dir demo/sample_images \
 --output_dir infer_outputs
 
