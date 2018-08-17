@@ -1,6 +1,10 @@
 # train
 python tools/train_net_step.py --dataset gaussian  \
---cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
+--cfg configs/baselines/e2e_mask_rcnn_R-50-FPN_1x.yaml \
+--use_tfboard --bs 1 --nw 4
+
+python tools/train_net_step.py --dataset coco2017  \
+--cfg configs/baselines/e2e_mask_rcnn_R-50-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 4
 
 
@@ -10,13 +14,32 @@ python tools/train_net_step.py --dataset gaussian  \
 --use_tfboard --bs 1 --nw 4
 
 
+# convert pre-trained model
+
+#  convert_coco_model_to_cityscapes.py  后缀带CS:对pre-trained模型中的blob进行了修改
+python lib/datasets/cityscapes/tools/convert_coco_model_to_cityscapes.py \
+--coco_model  data/pretrained_model/e2e_mask_rcnn_R-50-FPN_1x.pkl \
+--output data/pretrained_model/e2e_mask_rcnn_R-50-FPN_1x_CS.pkl
+
 
 # finetune    use detectron
+# x_101_1x
 
 python tools/train_net_step.py --dataset coco2017  \
 --cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
 --use_tfboard --bs 1 --nw 2 \
 --load_detectron data/pretrained_model/e2e_mask_rcnn_X-101-32x8d-FPN_1x_CS.pkl
+
+
+# R_50_2/1x
+
+python tools/train_net_step.py --dataset gaussian  \
+--cfg configs/baselines/e2e_mask_rcnn_R-50-FPN_2x.yaml \
+--use_tfboard --bs 1 --nw 2 \
+--load_detectron data/pretrained_model/e2e_mask_rcnn_R-50-FPN_2x_CS.pkl
+
+
+
 
 
 # finetune    use caffe checkpoint
@@ -36,14 +59,25 @@ python tools/test_net.py --dataset gaussian \
 --load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-16-51-25_pesong_step/ckpt/model_step180.pth
 
 
+python tools/test_net.py --dataset gaussian \
+--cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
+--load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug04-16-51-25_pesong_step/ckpt/model_step180.pth
+
+
 # visualize
 
-python tools/infer_simple.py --dataset coco \
---cfg configs/baselines/e2e_mask_rcnn_X-101-32x8d-FPN_1x.yaml \
---load_ckpt Outputs/e2e_mask_rcnn_X-101-32x8d-FPN_1x/Aug11-18-58-05_pesong_step/ckpt/model_step31478.pth \
+python tools/infer_simple.py --dataset gaussian \
+--cfg configs/baselines/e2e_mask_rcnn_R-50-FPN_2x.yaml \
+--load_ckpt Outputs/e2e_mask_rcnn_R-50-FPN_2x/Aug17-15-40-38_pesong_step/ckpt/model_step6713.pth \
 --image_dir demo/sample_images \
 --output_dir infer_outputs
 
+
+python tools/infer_simple.py --dataset coco \
+--cfg configs/baselines/e2e_mask_rcnn_R-50-FPN_2x.yaml \
+--load_ckpt Outputs/e2e_mask_rcnn_R-50-FPN_2x/Aug13-11-04-30_pesong_step/ckpt/model_step95395.pth \
+--image_dir demo/sample_images \
+--output_dir infer_outputs
 
 
 # convert original coco model to our own model
