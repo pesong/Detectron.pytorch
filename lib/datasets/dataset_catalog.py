@@ -99,6 +99,18 @@ DATASETS = {
         ANN_FN:
             _DATA_DIR + '/coco/annotations/image_info_test-dev2015.json'
     },
+    'coco_2017_ori_train': {
+        IM_DIR:
+            _DATA_DIR + '/coco_ori/images/train2017',
+        ANN_FN:
+            _DATA_DIR + '/coco_ori/annotations/instances_train2017.json',
+    },
+    'coco_2017_ori_val': {
+        IM_DIR:
+            _DATA_DIR + '/coco_ori/images/val2017',
+        ANN_FN:
+            _DATA_DIR + '/coco_ori/annotations/instances_val2017.json',
+    },
     'coco_2017_train': {
         IM_DIR:
             _DATA_DIR + '/coco/images/train2017',
